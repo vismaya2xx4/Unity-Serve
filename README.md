@@ -3,7 +3,7 @@
 UnityServe is an initiative to connect donors, volunteers, and NGOs through a seamless digital platform. This website serves as a central hub for donation pickups, volunteer registration, and resource distribution, ensuring efficient support for underprivileged communities.
 
 ### 🌍 Live Website
-[Visit UnityServe Website](#) *(Replace with actual link when deployed)*
+[Visit UnityServe Website](#) *(https://vismaya2xx4.github.io/Unity-Serve/)*
 
 ## 🚀 Technologies Used
 
@@ -64,12 +64,17 @@ UnityServe is an initiative to connect donors, volunteers, and NGOs through a se
 
 ## 👨‍💻 Developers & Contributors
 
-🔹 Project Lead: *Your Name*  
-🔹 Frontend & Backend: *Team Members' Names*  
-🔹 Design & Content: *Team Members' Names*  
+🔹 **Team Lead | Front End Developer:** Vismaya Vinod Nair  
+🔹 **Front End Developer:** Aswati Rajeev Nair  
+🔹 **Back-end Developer:** Louis Joseph Kavalam  
+🔹 **Back-end Developer:** Joshua M Varughese  
+🔹 **Design Lead:** Annie Paul  
+🔹 **Content Writer:** Merlin Sarah Thomas  
+🔹 **Finance Lead:** Jithin Jacob Mathew  
+🔹 **AI Lead:** Rontih Dhanesh  
 
-📌 GitHub Repository: [GitHub Link](#) *(Add repo link here)*  
-📌 Contact: [Email](mailto:contact@unityserve.org) *(Replace with actual email)*  
+📌 GitHub Repository: [GitHub Link](#) *(https://vismaya2xx4.github.io/Unity-Serve/)*  
+📌 Contact: [Email](mailto:unityservengo@gmail.com)   
 
 ### 📢 Want to Contribute?
 
