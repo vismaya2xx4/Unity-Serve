@@ -1,83 +1,78 @@
-# BadlaavFoundation-NGO-Website
+# UnityServe - NGO Website
 
-This project aims at being a complete, end-to-end solution for the functioning of a Dehradun based NGO, Badlaav Foundation, which is a not-for-profit organization founded in order to improve the lives and livelihoods of people from the vulnerable, marginalized and under-developed sections of the society. This single-page landing website was created to increase the awareness of the NGO (Badlaav Founadation) and reach as much people as possible. It was essential to have global presence that is to have online presence.
+UnityServe is an initiative to connect donors, volunteers, and NGOs through a seamless digital platform. This website serves as a central hub for donation pickups, volunteer registration, and resource distribution, ensuring efficient support for underprivileged communities.
 
-Link to the Website - [Bdalaav Foundation Website](https://anshumansrivastava108.github.io/BadlaavFoundation-NGO-Website/)
+### 🌍 Live Website
+[Visit UnityServe Website](#) *(Replace with actual link when deployed)*
 
-### Technologies Used:
+## 🚀 Technologies Used
 
-- HTML, CSS, Javascript
-- Libraries and Plugins - Bootstrap v4.1.3, Owl Craousel, Magnific Pop-Up, Popper.js, Slick
+- **Frontend:** HTML, CSS, JavaScript
+- **Frameworks & Libraries:** Bootstrap v5, FontAwesome, Owl Carousel, Magnific Popup, Popper.js
+- **Additional Tools:** Google Fonts, jQuery, AJAX
 
-### Current Sections
+## 📂 Website Features
 
-The website currently has the following sections:
+### Home Page  
+- Visually appealing landing page introducing UnityServe and its mission.
+- Clear call-to-action buttons for donations and volunteering.
 
-1. Why we do what we do? - A small insight on our NGO. It also contains a short video giving an insight into the motivation, vision, and mission of Badlaav Foundation.
+### About Us  
+- Insight into UnityServe’s mission and impact.
+- Embedded video or infographic showcasing NGO activities.
 
-2. Projects Section - The major 2 projects of Badlaav are listed in this section. It also includes a short description and images of the projects.
+### Services
+- **Healthcare:** Free checkups, immunization, and medical support.
+- **Education:** Donate books, stationery, and school essentials.
+- **Clothing Donation:** Contribute clothes for underprivileged communities.
+- **Food Donation:** Donate perishable/non-perishable food and cooked meals.
+- **Shelter Assistance:** Support temporary and long-term housing initiatives.
 
-3. Join Us Section - This section contains a button to join Badlaav Foundation as a volunteer. The button directs to the registration form.
-   
-4. Our Team Section - Board members can be seen in this section. It also contains links to contact the board members via thier social media accounts.
+### Join Us (Volunteering Section)
+- NGO & Individual Registration Forms for new volunteers.
+- Interactive buttons directing users to the relevant forms.
 
-5. Testimonials Section - This section contains testimonials from current and formal volunteers. Volunteers have expressed their views on the foundation.
-   
-6. Blogs Section - Badlaav Foundation frequently publishes blogs on topics such as education crises. The section contains the latest blogs.
-   
-### Goals: 
+### Donation Pickup Requests
+- Location-based filtering to find NGOs/restaurants available for food pickup.
+- Live updates on availability status.
+- Request Pickup button for NGOs in need.
 
-- Creating NGO Awareness – Building awareness for NGO was the primary goal. It was essential to boost the online presence of the NGO. 
-- Look for new volunteers – Look for potential volunteers who would be willing to tie up with the organization for various CSR activities.
+### Testimonials
+- Volunteer and beneficiary experiences to build trust and credibility.
 
-### Scalability:
+### Blog Section
+- Articles on social impact, NGO success stories, and upcoming events.
+- SEO-friendly content to boost engagement.
 
-- It will benefit the NGO by making it easy to search for the available resources.
-- When the work of NGOs will be made easy it will in turn benefit the people.
-- It will make it easy for the people who are willing to donate something to the NGO.
+### Contact Us
+- Email & phone support for queries and partnerships.
+- Integrated Google Maps API for NGO location.
 
-### Screenshots of different Sections of the Website
+## 🎯 Project Goals
 
-Home: 
+✅ Increase Awareness: Expand UnityServe’s digital presence.  
+✅ Simplify Donations: Provide a seamless experience for users to contribute.  
+✅ Volunteer Engagement: Offer clear paths for individuals and organizations to get involved.  
+✅ Optimize Resource Distribution: Improve food pickups and shelter allocations.  
 
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(463).png)
+## 📈 Future Enhancements
 
-About:
+🔹 User Accounts: Enable donors & NGOs to track their activities.  
+🔹 AI-driven Matching System: Connect donors with the nearest NGOs in real-time.  
+🔹 Live Chat Support: Assist users with inquiries instantly.  
+🔹 Mobile App Development: Extend accessibility beyond the web.  
 
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(455).png)
+## 👨‍💻 Developers & Contributors
 
-Projects:
+🔹 Project Lead: *Your Name*  
+🔹 Frontend & Backend: *Team Members' Names*  
+🔹 Design & Content: *Team Members' Names*  
 
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(456).png)
+📌 GitHub Repository: [GitHub Link](#) *(Add repo link here)*  
+📌 Contact: [Email](mailto:contact@unityserve.org) *(Replace with actual email)*  
 
-Join Us:
+### 📢 Want to Contribute?
 
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(457).png)
+We welcome developers, designers, and volunteers to join us in enhancing UnityServe! Submit a pull request or reach out to collaborate.
 
-Our Team:
-
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(458).png)
-
-Testimonials:
-
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(459).png)
-
-Blogs:
-
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(460).png)
-
-Contact Us:
-
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(461).png)
-
-Footer:
-
-![image](https://raw.githubusercontent.com/AnshumanSrivastava108/BadlaavFoundation-NGO-Website/main/Screenshots/Screenshot%20(462).png)
-
-## Author
-
-**Anshuman Srivastava**
-
-* Twitter: [@Anshuman_121](https://twitter.com/Anshuman_121)
-* Github: [@AnshumanSrivastava108](https://github.com/AnshumanSrivastava108)
-* LinkedIn: [@AnshumanSrivastava108](https://www.linkedin.com/in/anshumansrivastava108)
+*This project is part of UnityServe's initiative to bridge the gap between resources and those in need.*
