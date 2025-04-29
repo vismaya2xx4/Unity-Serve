@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Serve - Sign In / Sign Up</title>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDamfMwJ3tdO1YduL6IfJ-nK_xpWwzfR3I",
+            authDomain: "unityserve-demo-2f30f.firebaseapp.com",
+            projectId: "unityserve-demo-2f30f",
+            storageBucket: "unityserve-demo-2f30f.appspot.com",
+            messagingSenderId: "365353192644",
+            appId: "1:365353192644:web:104908f7e2c22db1d44d91",
+            measurementId: "G-J4SBKX337D"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth(app);
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+      
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4ea8ff;
+            --primary-hover: #3d97ff;
+            --secondary-color: #6c757d;
+            --accent-color: #e86327;
+            --text-color: #333;
+            --light-bg: #f5f7fa;
+            --border-radius: 0.75rem;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        
+        .header-container {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 1rem 0;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+        
+        .site-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+        }
+        
+        .site-logo .text-primary {
+            color: var(--primary-color) !important;
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 1px;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .site-logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            width: 100%;
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            background-color: #ffffff;
+            height: auto;
+            min-height: 0;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .auth-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/overlay.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            min-height: 350px;
+        }
+        
+        .auth-banner h2 {
+            font-family: 'Anton', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .auth-banner p {
+            font-size: clamp(1rem, 1.2vw, 1.1rem);
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        
+        .auth-form-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .auth-tabs {
+            background: white;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .auth-tab {
+            background: none;
+            border: none;
+            padding: 0.75rem 0;
+            font-size: clamp(1rem, 1.1vw, 1.1rem);
+            font-weight: 700;
+            color: var(--secondary-color);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary-color);
+        }
+        
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary-color);
+            bottom: -2px;
+            left: 0;
+        }
+        
+        .auth-form {
+            padding: 0 2.5rem 2.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .auth-form-title {
+            font-size: clamp(1.6rem, 2vw, 1.8rem);
+            font-weight: 700;
+            margin: 1.5rem 0; /* Added top margin here */
+            color: var(--text-color);
+            text-align: center;
+            padding-top: 1rem; /* Added padding-top */
+        }
+        
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .form-control {
+            padding: 0.9rem 1.2rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e0e0e0;
+            font-size: 1rem;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78, 168, 255, 0.15);
+        }
+        
+        .name-fields {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .name-fields .form-group {
+            flex: 1;
+        }
+        
+        .password-hint {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            margin-top: 0.25rem;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .form-check-input {
+            margin-right: 0.5rem;
+        }
+        
+        .btn-auth {
+            padding: 1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn-auth:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(78, 168, 255, 0.2);
+        }
+        
+        .auth-links {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .auth-links a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+        
+        .social-auth {
+            margin-top: 2rem;
+        }
+        
+        .social-auth-title {
+            position: relative;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+        }
+        
+        .social-auth-title::before,
+        .social-auth-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+        
+        .social-auth-title::before {
+            left: 0;
+        }
+        
+        .social-auth-title::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-btn-google {
+            background-color: #DB4437;
+        }
+        
+        .social-btn-facebook {
+            background-color: #4267B2;
+        }
+        
+        .social-btn-twitter {
+            background-color: #1DA1F2;
+        }
+        
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        
+        .terms-privacy a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            margin: 0 0.5rem;
+        }
+        
+        .terms-privacy a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 992px) {
+            .auth-container {
+                flex-direction: row;
+                min-height: 650px;
+            }
+            
+            .auth-banner {
+                flex: 1;
+                min-height: auto;
+            }
+            
+            .auth-form-container {
+                flex: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .auth-banner {
+                padding: 2rem;
+                min-height: 250px;
+            }
+            
+            .auth-tabs {
+                padding: 1rem 2rem 0;
+            }
+            
+            .auth-form {
+                padding: 0 2rem 2rem;
+            }
+            
+            .name-fields {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .auth-banner {
+                padding: 1.5rem;
+                min-height: 200px;
+            }
+            
+            .auth-tabs {
+                padding: 1rem 1.5rem 0;
+            }
+            
+            .auth-form {
+                padding: 0 1.5rem 1.5rem;
+            }
+            
+            .auth-form-title {
+                padding-top: 0.5rem; /* Adjusted for mobile */
+                margin: 1rem 0; /* Adjusted for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header-container">
+        <div class="site-logo">
+            <img src="images/ngo_logo.png" alt="Unity Serve Logo">
+            <span class="text-primary">Unity Serve</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="auth-container">
+            <div class="auth-banner">
+                <h2>WELCOME TO UNITY SERVE</h2>
+                <p>Join our mission to make a difference by signing in or creating an account.</p>
+            </div>
+            <div class="auth-form-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="toggleForm('signin')">Sign In</button>
+                    <button class="auth-tab" onclick="toggleForm('signup')">Sign Up</button>
+                </div>
+
+                <div class="auth-form">
+                    <!-- Sign In Form -->
+                    <div id="signin" class="form-section active">
+                        <h3 class="auth-form-title">SIGN IN</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="signin-email" class="form-label">Email address</label>
+                                <input type="email" id="signin-email" class="form-control" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="signin-password" class="form-label">Password</label>
+                                <input type="password" id="signin-password" class="form-control" placeholder="Password">
+                            </div>
+                            <button type="button" class="btn-auth" onclick="signIn()">Sign In</button>
+                            <div class="auth-links">
+                                <a href="#">Forgot password?</a>
+                            </div>
+                        </form>
+
+                        <div class="social-auth">
+                            <div class="social-auth-title">Or continue with</div>
+                            <div class="social-buttons">
+                                <a href="#" class="social-btn social-btn-google"><i class="fab fa-google"></i></a>
+                                <a href="#" class="social-btn social-btn-facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-btn social-btn-twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sign Up Form -->
+                    <div id="signup" class="form-section">
+                        <h3 class="auth-form-title">SIGN UP</h3>
+                        <form id="signup-form">
+                            <div class="name-fields">
+                                <div class="form-group">
+                                    <label for="first-name" class="form-label">First name</label>
+                                    <input type="text" id="first-name" class="form-control" placeholder="First name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last-name" class="form-label">Last name</label>
+                                    <input type="text" id="last-name" class="form-control" placeholder="Last name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="signup-email" class="form-label">Email address</label>
+                                <input type="email" id="signup-email" class="form-control" placeholder="Enter email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="signup-password" class="form-label">Password</label>
+                                <input type="password" id="signup-password" class="form-control" placeholder="Create password" required
+                                       minlength="8">
+                                <div class="password-hint">
+                                    Use 8+ characters with a mix of letters, numbers & symbols
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirm-password" class="form-label">Confirm Password</label>
+                                <input type="password" id="confirm-password" class="form-control" placeholder="Confirm password" required>
+                            </div>
+                            
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label" for="terms">
+                                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                                </label>
+                            </div>
+                            
+                            <button type="button" class="btn-auth" onclick="signUp()">Create Account</button>
+                        </form>
+
+                        <div class="auth-links">
+                            Already have an account? <a href="#" onclick="toggleForm('signin')">Sign in</a>
+                        </div>
+
+                        <div class="social-auth">
+                            <div class="social-auth-title">Or continue with</div>
+                            <div class="social-buttons">
+                                <a href="#" class="social-btn social-btn-google"><i class="fab fa-google"></i></a>
+                                <a href="#" class="social-btn social-btn-facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-btn social-btn-twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>&copy; 2025 Unity Serve. All rights reserved.</div>
+        <div class="terms-privacy">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        function toggleForm(tab) {
+            document.querySelectorAll('.auth-tab').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.form-section').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.auth-tab[onclick*="${tab}"]`).classList.add('active');
+            document.getElementById(tab).classList.add('active');
+            
+            // Scroll to top when switching forms
+            document.querySelector('.auth-form').scrollTo(0, 0);
+        }
+
+        function signIn() {
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+            
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    window.location.href = "index.html";
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        }
+
+        function signUp() {
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const termsChecked = document.getElementById('terms').checked;
+            
+            // Validation
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (!termsChecked) {
+                alert('Please agree to the Terms of Service and Privacy Policy');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long');
+                return;
+            }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert('Account created successfully!');
+                    toggleForm('signin');
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        }
+
+        // Prevent scrolling during load
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('load', function() {
+            document.body.style.overflow = 'auto';
+        });
+    </script>
+</body>
+</html>
